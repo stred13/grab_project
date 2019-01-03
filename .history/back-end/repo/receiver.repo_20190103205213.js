@@ -47,6 +47,5 @@ async function loadAddress() {
 module.exports = {
   findoneReceiver,
   addAddress,
-  loadAddress,
-  saveRFT
+  loadAddress
 };
