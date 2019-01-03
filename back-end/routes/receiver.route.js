@@ -7,8 +7,7 @@ var events = require('../controllers/event');
 //router.get('/',receiver.getListReceivers);
 
 router.post('/login',receiver.getRe_by_userName);
-router.get('/shortadded',events.subscribeShortAdded);//đăng kí lấy data từ link shortadded
-router.post('/add',receiver.shortAdd_Added);
+
 
 
 //router.post('/login',tokenMiddleware.verifyAccessToken,receiver.verifying_User);
