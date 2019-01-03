@@ -30,7 +30,7 @@ export default {
     };
   },
   methods: {
-     herbesin(evt) {
+    herbesin(evt) {
       // console.log(this.myLatlng.lat);
       var R = 6371e3; // metres
       var φ1 = (this.myLatlng.lat * Math.PI) / 180;
@@ -53,7 +53,7 @@ export default {
         this.markers[0].position.lng = evt.latLng.lng();
         //console.log(this.markers[0].position.lat
       }
-       //console.log("Khoảng cách 2:" + this.markers[0].lat);
+      //console.log("Khoảng cách 2:" + this.markers[0].lat);
     }
   }
 };
