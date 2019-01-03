@@ -7,8 +7,10 @@ var app = express();
 var eventEmitter = require('eventemitter3');
 var emitter = new eventEmitter();
 
+//
 const config = require('../config.js');
-var receiRepo = require('../repo/receiver.repo');
+var events = require('./event');
+var receiRepo = require('../repo/receiver.repo')
 
 module.exports.getListReceivers = async function (req, res) {
     try {
@@ -60,5 +62,29 @@ module.exports.verifying_User = (req, res) => {
     } catch (error) {
         res.statusCode = 500;
         console.log(error);
+    }
+}
+
+module.exports.shortAdd_Added =async (req, res) => {
+   try {
+        //console.log(req);
+        var data = req.body;
+       // console.log(req.body);
+        await receiRepo.addAddress(data)
+        events.publishShortAdded(data);
+        res.json(data);
+    } catch (error) {
+        console.log(error)
+
+    }
+}
+
+module.exports.loadAdd = async (req,res)=>{
+    try {
+        var data = await receiRepo.loadAddress();
+        //console.log(data);
+        res.json(data);
+    } catch (err) {
+        console.log(err);
     }
 }
