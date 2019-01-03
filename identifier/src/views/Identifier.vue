@@ -23,4 +23,49 @@
   </div>
 </template>
 
-
+<script>
+//import axios from 'axios';
+import listtable from "../components/ListTable.vue";
+//import forminput from '../components/formInput.vue'
+export default {
+  name: "identifier",
+  components: {
+    listtable
+  },
+  data () {
+    return {
+      center: { lat: 10.0, lng: 10.0 },
+      markers: [
+        { position: { lat: 10.0, lng: 10.0 } },
+        { position: { lat: 10.0, lng: 11.0 } },
+      ]
+    }
+  },
+  /*data(){
+        return{
+            rtdata:''
+        };
+    },
+    created() {
+    this.getdataSv();
+  },
+  methods: {
+    getdt() {
+      console.log("con");
+      //this.list.push(this.laddres);
+    },
+    getdataSv() {
+      var es = new EventSource("http://localhost:3000/receivers/shortadded");
+      if (typeof EventSource === "undefined") {
+        console.log("NOT SUPPORT");
+        return;
+      }
+      
+      es.addEventListener("SHORT_ADDED", event => {
+        console.log(event.data);
+        this.rtdata=event.data;
+      });
+    }
+  },*/
+};
+</script>
