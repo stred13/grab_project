@@ -12,6 +12,7 @@
             @click="moveMarkers"
           >
             <GmapMarker
+              @click="aaa"
               v-bind:key="index"
               v-for="(m, index) in markers"
               v-bind:position="m.position"
@@ -95,6 +96,16 @@
                 placeholder="Ghi chú"
               >
             </div>
+            <div class="form-group">
+              
+              <input @focus="searching"
+                type="text"
+                class="form-control"
+                id="mapsearch"
+                placeholder="Ghi chú"
+              >
+            </div>
+
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </form>
@@ -134,7 +145,9 @@ export default {
       online: "online",
       offline: "offlined",
       directionsService: "",
-      directionsDisplay: ""
+      directionsDisplay: "",
+      infowindow : {}
+      
     };
   },
   methods: {
@@ -206,7 +219,22 @@ export default {
           }
         }
       );
+    },
+    aaa(evt) {
+      console.log(evt.latLng.lat());
+      var contentString = "<div><h1>aaaa</h1></div>";
+      this.infowindow = new google.maps.InfoWindow({
+        size: new google.maps.Size(150, 50)
+      });
+      this.infowindow.setContent(contentString);
+      var markerz = new google.maps.Marker({
+        position: new google.maps.LatLng(evt.latLng.lat(), evt.latLng.lng()),
+         map: this.$refs.xyz.$mapObject , markerz
+      });
+      this.infowindow.open(this.$refs.xyz.$mapObject, markerz);
+      
     }
+
   }
 };
 </script>
