@@ -73,3 +73,56 @@
     <b-row></b-row>
   </b-container>
 </template>
+
+<script>
+//import axios from 'axios'
+export default {
+  name: "login",
+  data () {
+    return {
+      form: {
+        user_name: "",
+        pass: ""
+      },
+      show: true
+    };
+  },
+  /*mounted(){
+    axios.get('http://localhost:3000/receivers/login')
+    .then(res=>{
+      console.log(JSON.stringify(res.data));
+    }).catch(err=>{
+      console.log(err);
+    })
+  },*/
+
+  // methods: {
+  //   onSubmit(evt) {
+  //     var self = this;
+  //     evt.preventDefault();
+  //     axios.post('http://localhost:3000/identifier/login' , self.form)
+  //     .then(res=>{
+  //       if(res.data!=null){
+  //         console.log("front-end "+res.data);
+  //         this.$router.push('/receivers')
+  //       }
+  //     }).catch(err =>{
+  //       console.log("front-end "+err);
+  //     })
+  //   },
+  //   onReset(evt) {
+  //     evt.preventDefault();
+  //     /* Reset our form values */
+  //     this.form.text = "";
+  //     this.form.name = "";
+  //     /* Trick to reset/clear native browser form validation state */
+  //     this.show = false;
+  //     this.$nextTick(() => {
+  //       this.show = true;
+  //     });
+  //   }
+  // },
+
+};
+</script>
+
