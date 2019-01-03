@@ -16,3 +16,23 @@
     </GmapMap>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      center: { lat: 10.762681, lng: 106.681175 },
+      markers: [
+        {
+          position: { lat: 10.762681, lng: 106.681175 }
+        }
+      ],
+      myLatlng: { lat: 10.762681, lng: 106.681175 }
+    };
+  },
+  methods: {
+  }
+};
+</script>
+
+<style>
+</style>
