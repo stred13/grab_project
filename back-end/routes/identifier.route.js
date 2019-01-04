@@ -5,11 +5,11 @@ var tokenMiddleware = require('../middlewares/token');
 var events = require('../controllers/event');
 var identifier = require('../controllers/identifier.controller');
 
-
 //router.get('/',receiver.getListReceivers);
 
-router.post('/login',receiver.getRe_by_userName);
-router.post('/update',identifier.updateFulladd);
+router.post('/login', receiver.getRe_by_userName);
+router.post('/update', identifier.updateFulladd);
+router.get('/addupdated', events.subscribeFullUpdate);
 //router.get('/login',tokenMiddleware.verifyAccessToken,receiver.verifying_User);
 
 module.exports = router;
