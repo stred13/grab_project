@@ -135,6 +135,30 @@ export default {
     //this.getdataSv();
   },
   methods: {
+    senddata (evt) {
+      var self = this;
+      var today = new Date();
+      /* var day = today.getDate() < 10 ? ('0'+today.getDate()) : today.getDate();
+       var month = today.getMonth()<10?('0'+today.getMonth()):today.getMonth();
+       var year = today.getFullYear();
+       var hours = today.getHours()<10?('0'+today.getHours()):today.getHours();
+       var minutes = today.getMinutes()<10?('0'+today.getMinutes()):today.getMinutes();
+       var seconds = today.getSeconds()<10?('0'+today.getSeconds()):today.getSeconds();
+       self.guest.date = day + "-" + month + "-" + year + ' ' + hours+":"+minutes+':'+seconds;*/
+      self.guest.dateRe = today;
+      //console.log(typeof( self.guest.date));
+      evt.preventDefault();
+      axios
+        .post("http://localhost:3000/receivers/add", self.guest)
+        .then(res => {
+          self.list.push(res.data);
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log("err " + err);
+        });
+    }
   }
 };
 </script>
+
