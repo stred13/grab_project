@@ -12,11 +12,13 @@
             @click="moveMarkers"
           >
             <GmapMarker
-              @click="aaa"
+              
               v-bind:key="index"
               v-for="(m, index) in markers"
               v-bind:position="m.position"
               v-bind:clickable="true"
+              v-bind:draggable="true"
+              
             />
           </GmapMap>
         </div>
@@ -54,7 +56,7 @@
                 label-for="nestedStreet"
               >
                 <b-form-input id="nestedStreet"></b-form-input>
-              </b-form-group>
+              </b-form-group> 
               <b-form-group
                 horizontal
                 label="City:"
@@ -97,8 +99,8 @@
               >
             </div>
             <div class="form-group">
-              
-              <input @focus="searching"
+              <input
+                @focus="searching"
                 type="text"
                 class="form-control"
                 id="mapsearch"
@@ -106,7 +108,12 @@
               >
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group">
+            <button type="submit" class="btn btn-primary">Chấp nhận</button>
+            &nbsp;
+            <button type="submit" class="btn btn-primary">Hủy</button>
+            </div>
+            
           </div>
         </form>
       </div>
@@ -118,6 +125,7 @@
       async
       defer
     ></script>
+    
 <script>
 export default {
   data() {
@@ -146,10 +154,10 @@ export default {
       offline: "offlined",
       directionsService: "",
       directionsDisplay: "",
-      infowindow : {}
-      
+      infowindow: {}
     };
   },
+  mounted() {},
   methods: {
     countDistance(evt) {
       var R = 6371e3; // metres
@@ -167,7 +175,7 @@ export default {
       return d;
     },
     moveMarkers(evt) {
-      this.calculateAndDisplayRoute();
+      //this.calculateAndDisplayRoute();
       // console.log(this.myLatlng.lat);
       var d = this.countDistance(evt);
       console.log("Khoảng cách :" + d);
@@ -221,20 +229,89 @@ export default {
       );
     },
     aaa(evt) {
+      var seft = this;
       console.log(evt.latLng.lat());
       var contentString = "<div><h1>aaaa</h1></div>";
-      this.infowindow = new google.maps.InfoWindow({
+      seft.infowindow = new google.maps.InfoWindow({
         size: new google.maps.Size(150, 50)
       });
-      this.infowindow.setContent(contentString);
-      var markerz = new google.maps.Marker({
+      seft.infowindow.setContent(contentString);
+      // var markerz = new google.maps.Marker({
+      //   position: new google.maps.LatLng(evt.latLng.lat(), evt.latLng.lng()),
+      //   map: this.$refs.xyz.$mapObject,
+      //   markerz
+      // });
+       seft.markers[0] = new google.maps.Marker({
         position: new google.maps.LatLng(evt.latLng.lat(), evt.latLng.lng()),
-         map: this.$refs.xyz.$mapObject , markerz
+        map: this.$refs.xyz.$mapObject
       });
-      this.infowindow.open(this.$refs.xyz.$mapObject, markerz);
-      
-    }
+      this.infowindow.open(this.$refs.xyz.$mapObject, seft.markers[0]);
 
+      seft.markers[0].addListener("click", function() {
+      // $(".infoBox").fadeOut(300);
+      // ib.open(map, newMarker);
+      seft.infowindow.open(seft.$refs.xyz.$mapObject, seft.markers[0]);
+      console.log(11);
+    });
+
+    },
+    searching(evt) {
+      var seft = this;
+      var input = document.getElementById("mapsearch");
+      // var searchBox = new google.maps.places.SearchBox(input);
+      // google.maps.event.addListener(searchBox, "places_changed", function() {
+      //   var places = searchBox.getPlaces();
+
+      //   var bounds = new google.maps.LatLngBounds();
+      //   console.log(this.markers[0].position.lat);
+      //   // var i, place;
+
+      //   // for (i = 0; (place = places[i]); i++) {
+      //   //   bounds.extend(place.geometry.location);
+      //   //   marker.setPosition(place.geometry.location);
+      //   // }
+      //   // map.fitBounds(bounds);
+      //   // map.setZoom(16);
+      // });
+
+      var autocomplete = new google.maps.places.Autocomplete(input);
+      autocomplete.setComponentRestrictions({ country: "vn" });
+
+      autocomplete.addListener("place_changed", function() {
+        var place = autocomplete.getPlace();
+
+        if (!place.geometry) {
+          // User entered the name of a Place that was not suggested and
+          // pressed the Enter key, or the Place Details request failed.
+          window.alert("No details available for input: '" + place.name + "'");
+          return;
+        }
+        // if (place.geometry.viewport) {
+        //   this.$refs.xyz.$mapObject.fitBounds(place.geometry.viewport);
+        // } else {
+        //   this.$refs.xyz.$mapObject.setCenter(place.geometry.location);
+        //   this.$refs.xyz.$mapObject.setZoom(17); // Why 17? Because it looks good.
+
+        // }
+        // marker.setPosition(place.geometry.location);
+        // marker.setVisible(true);
+        // var marker = new google.maps.Marker({
+        //   position: new google.maps.LatLng(
+        //     place.geometry.location.lat(),
+        //     place.geometry.location.lng()
+        //   ),
+        //   draggable: true,
+        //   map: this.$refs.xyz.$mapObject
+        // });
+        // marker.setMap(this.$refs.xyz.$mapObject);
+        seft.myLatlng.lat = place.geometry.location.lat();
+        seft.myLatlng.lng = place.geometry.location.lng();
+        seft.markers[0].position.lat = place.geometry.location.lat();
+        seft.markers[0].position.lng = place.geometry.location.lng();
+        seft.markers[0]
+        //console.log(;
+      });
+    }
   }
 };
 </script>
