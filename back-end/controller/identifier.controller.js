@@ -17,6 +17,7 @@ module.exports ={
         try {
              var a =await identifier.updateAdd(req.body)
              //console.log(a);
+             events.updateFulladd(a);
              res.send(JSON.stringify(a));
         } catch (err) {
             console.log(err);

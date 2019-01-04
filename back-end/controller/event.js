@@ -38,6 +38,16 @@ var publishShortAdded = categoryObj => {
     emitter.emit('SHORT_ADDED', categoryObj);
 }
 
+var subscribeShortAdded = (req, res) => {
+    subscribeEvent(req, res, 'FULL_ADDED');
+}
+
+var publishShortAdded = categoryObj => {
+    emitter.emit('FULL_ADDED', categoryObj);
+}
+
+
+
 module.exports = {
     subscribeShortAdded,
     publishShortAdded
