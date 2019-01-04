@@ -9,7 +9,9 @@ var addressriSchema = new mongoose.Schema({
     sdt:String,
     shortadd: String,
     fulladd: String,
-    note:String
+    note:String,
+    dateRe:String,
+    status:String
 })
 
 var receiversSchema = new mongoose.Schema({
