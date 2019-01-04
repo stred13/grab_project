@@ -308,7 +308,9 @@ export default {
         seft.myLatlng.lng = place.geometry.location.lng();
         seft.markers[0].position.lat = place.geometry.location.lat();
         seft.markers[0].position.lng = place.geometry.location.lng();
-        seft.markers[0]
+        
+        seft.markers[0].setMap(null);
+
         //console.log(;
       });
     }
