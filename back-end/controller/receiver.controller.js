@@ -71,7 +71,7 @@ module.exports.shortAdd_Added =async (req, res) => {
         var data = req.body;
        // console.log(req.body);
         await receiRepo.addAddress(data)
-        events.publishShortAdded(data);
+        //events.publishShortAdded(data);
         res.json(data);
     } catch (error) {
         console.log(error)
